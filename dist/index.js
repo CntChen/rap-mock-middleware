@@ -12,9 +12,11 @@ var _koa = require('koa');
 
 var _koa2 = _interopRequireDefault(_koa);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _config = require('./config');
 
-// import Config from 'config';
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Koa application is now a class and requires the new operator.
 var app = new _koa2.default();
@@ -79,4 +81,4 @@ app.use(function () {
   };
 }());
 
-app.listen(3000);
+app.listen(_config2.default.MiddleWarePort);
