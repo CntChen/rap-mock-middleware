@@ -21,7 +21,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Koa application is now a class and requires the new operator.
 var app = new _koa2.default();
 
-// uses async arrow functions
+/**
+ * 出错控制
+ */
 app.use(function () {
   var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(ctx, next) {
     return _regenerator2.default.wrap(function _callee$(_context) {
@@ -56,19 +58,38 @@ app.use(function () {
   };
 }());
 
+/**
+ * 请求参数获取
+ */
 app.use(function () {
-  var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx) {
-    var user;
+  var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {
     return _regenerator2.default.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            // const user = await User.getById(ctx.session.userid); // await instead of yield
-            user = 'Cntchen';
+            console.log('header:\n', ctx.header);
+            console.log('headers:\n', ctx.headers);
+            console.log('method:\n', ctx.method);
+            console.log('url\n', ctx.url);
+            console.log('ctx.originalUrl\n', ctx.originalUrl);
+            console.log('ctx.origin\n', ctx.origin);
+            console.log('ctx.href\n', ctx.href);
+            console.log('ctx.path\n', ctx.path);
+            console.log('ctx.query\n', ctx.query);
+            console.log('ctx.querystring\n', ctx.querystring);
+            console.log('ctx.host\n', ctx.host);
+            console.log('ctx.hostname\n', ctx.hostname);
+            console.log('ctx.protocol\n', ctx.protocol);
+            console.log('ctx.secure\n', ctx.secure);
+            console.log('ctx.ip\n', ctx.ip);
+            console.log('ctx.accepts()\n', ctx.accepts());
+            // console.log('ctx.get()\n', ctx.get());
 
-            ctx.body = user; // ctx instead of this
 
-          case 2:
+            _context2.next = 18;
+            return next();
+
+          case 18:
           case 'end':
             return _context2.stop();
         }
@@ -76,9 +97,33 @@ app.use(function () {
     }, _callee2, undefined);
   }));
 
-  return function (_x3) {
+  return function (_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
 }());
 
-app.listen(_config2.default.MiddleWarePort);
+app.use(function () {
+  var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx) {
+    var user;
+    return _regenerator2.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            user = 'Cntchen';
+
+            ctx.body = user; // ctx instead of this
+
+          case 2:
+          case 'end':
+            return _context3.stop();
+        }
+      }
+    }, _callee3, undefined);
+  }));
+
+  return function (_x5) {
+    return _ref3.apply(this, arguments);
+  };
+}());
+
+app.listen(_config2.default.MiddleWarePort, _config2.default.MiddleWareDomain);
