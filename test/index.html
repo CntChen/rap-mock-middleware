@@ -4,15 +4,125 @@
   <title>RAP Mock Middleware test</title>
 </head>
 <body>
-  <p>RAP Mock Middleware test<p>
+  <p>RAP Mock Middleware Test<p>
   <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
+    // add Cookie
+    document.cookie = 'hello=world';
+    var ServerUrl = 'http://192.168.1.200:28080/';
+
+    // 写headers时候大小写无关。???
+    
+    // Simple Request
+    // GET
     $.ajax({
-      url: 'http://10.75.3.135:28080/mockjs/8/member/info/myAuth.json',
+      url: ServerUrl,
       type: 'GET',
+      headers: {
+        //the headers set automatically by the user agent
+        // 'Accept': '*/*',
+        // 'Accept-Language': 'en-US,en;q=0.81',
+
+        // 浏览器知道自己的能力是什么，所以这些默认头JS开发者自己设置也没用，浏览器会覆写的
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Connection': 'keep-alive',
+        // 指示浏览器信息，不给改
+        'Host': '192.168.1.20028080',
+        'Origin': 'http://localhost',
+        'Referer': 'http://localhost/work/rap-mock-middleware/test/',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.100 Safari/537.36',
+        // 开发者写的会被覆写，但是引起了Preflight
+        // 'Cache-Control': 'no-cache', // max-age=0
+
+        // 写了不给添加上去
+         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+
+        // allowed to be manually set
+        'Accept': 'ramdom',
+        'Accept-Language': 'ramdom',
+        'Content-Language': 'ramdom',
+
+        // enumeration:`application/x-www-form-urlencoded` `multipart/form-data` `text/plain`
+        'Content-Type': 'text/plain',
+      },
       data: {},
       success: function(dt){
-          console.log(dt);
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
+      },
+    });
+
+    // POST
+    $.ajax({
+      url: ServerUrl,
+      type: 'POST',
+      headers: {
+      },
+      data: {},
+      success: function(dt){
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
+      },
+    });
+
+    // HEAD
+    $.ajax({
+      url: ServerUrl,
+      type: 'HEAD',
+      headers: {
+      },
+      data: {},
+      success: function(dt){
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
+      },
+    });
+
+    // Preflighted Requests
+    // uses methods other than GET, HEAD or POST
+    $.ajax({
+      url: ServerUrl,
+      type: 'DELETE',
+      headers: {
+      },
+      data: {},
+      success: function(dt){
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
+      },
+    });
+
+    // Content-Type other than enumeration
+    $.ajax({
+      url: ServerUrl,
+      type: 'GET',
+      headers: {
+        'Content-Type': 'text/xml',
+      },
+      data: {},
+      success: function(dt){
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
+      },
+    });
+
+    // custom headers in the request
+    $.ajax({
+      url: ServerUrl,
+      type: 'GET',
+      headers: {
+        'cntchen': 'FE',
+      },
+      data: {},
+      success: function(dt){
+        console.log(dt);
+      },
+      beforeSend: function(xhr){
       },
     });
   </script>
