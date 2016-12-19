@@ -9,10 +9,10 @@
   <script type="text/javascript">
     // add Cookie
     document.cookie = 'hello=world';
-    var ServerUrl = 'http://192.168.1.200:28080/';
+    var ServerUrl = 'http://192.168.1.5:28080/';
 
     // 写headers时候大小写无关。???
-    
+
     // Simple Request
     // GET
     $.ajax({
@@ -23,19 +23,19 @@
         // 'Accept': '*/*',
         // 'Accept-Language': 'en-US,en;q=0.81',
 
-        // 浏览器知道自己的能力是什么，所以这些默认头JS开发者自己设置也没用，浏览器会覆写的
-        'Accept-Encoding': 'gzip, deflate, sdch',
-        'Connection': 'keep-alive',
+        // 浏览器知道自己的能力是什么，所以这些默认头JS开发者自己设置也没用，浏览器会覆写的,console
+        // 'Accept-Encoding': 'gzip, deflate, sdch',
+        // 'Connection': 'keep-alive',
         // 指示浏览器信息，不给改
-        'Host': '192.168.1.20028080',
-        'Origin': 'http://localhost',
-        'Referer': 'http://localhost/work/rap-mock-middleware/test/',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.100 Safari/537.36',
+        // 'Host': '192.168.1.20028080',
+        // 'Origin': 'http://localhost',
+        // 'Referer': 'http://localhost/work/rap-mock-middleware/test/',
+        // 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.100 Safari/537.36',
         // 开发者写的会被覆写，但是引起了Preflight
         // 'Cache-Control': 'no-cache', // max-age=0
 
         // 写了不给添加上去
-         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+         // 'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
 
         // allowed to be manually set
         'Accept': 'ramdom',
@@ -50,6 +50,7 @@
         console.log(dt);
       },
       beforeSend: function(xhr){
+        xhr.withCredentials = true;
       },
     });
 
@@ -125,6 +126,14 @@
       beforeSend: function(xhr){
       },
     });
+
+    var invocation = new XMLHttpRequest();    
+    if(invocation) {
+      invocation.open('GET', ServerUrl, true);
+      invocation.withCredentials = true;
+      invocation.send(); 
+    }
+
   </script>
 </body>
 

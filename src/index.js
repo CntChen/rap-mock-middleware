@@ -37,13 +37,17 @@ app.use(async (ctx, next) => {
   console.log('ctx.ip\n', ctx.ip);
   console.log('ctx.accepts()\n', ctx.accepts());
   // console.log('ctx.get()\n', ctx.get());
-    
-  
+     
   await next();
 });
 
 app.use(async ctx => {
   const user = 'Cntchen';
+  ctx.set({
+    'Set-Cookie': 'from=' + ctx.hostname + '; path=/',
+    'access-control-allow-origin': ctx.header.origin,
+  });
+  // ctx.cookies.set(name, value, [options])
   ctx.body = user; // ctx instead of this
 });
 

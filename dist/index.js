@@ -85,7 +85,6 @@ app.use(function () {
             console.log('ctx.accepts()\n', ctx.accepts());
             // console.log('ctx.get()\n', ctx.get());
 
-
             _context2.next = 18;
             return next();
 
@@ -111,9 +110,14 @@ app.use(function () {
           case 0:
             user = 'Cntchen';
 
+            ctx.set({
+              'Set-Cookie': 'from=' + ctx.hostname + '; path=/',
+              'access-control-allow-origin': ctx.header.origin
+            });
+            // ctx.cookies.set(name, value, [options])
             ctx.body = user; // ctx instead of this
 
-          case 2:
+          case 3:
           case 'end':
             return _context3.stop();
         }
