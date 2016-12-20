@@ -16,6 +16,10 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
+var _koav2Cors = require('./koav2-cors');
+
+var _koav2Cors2 = _interopRequireDefault(_koav2Cors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Koa application is now a class and requires the new operator.
@@ -67,28 +71,10 @@ app.use(function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log('header:\n', ctx.header);
-            console.log('headers:\n', ctx.headers);
-            console.log('method:\n', ctx.method);
-            console.log('url\n', ctx.url);
-            console.log('ctx.originalUrl\n', ctx.originalUrl);
-            console.log('ctx.origin\n', ctx.origin);
-            console.log('ctx.href\n', ctx.href);
-            console.log('ctx.path\n', ctx.path);
-            console.log('ctx.query\n', ctx.query);
-            console.log('ctx.querystring\n', ctx.querystring);
-            console.log('ctx.host\n', ctx.host);
-            console.log('ctx.hostname\n', ctx.hostname);
-            console.log('ctx.protocol\n', ctx.protocol);
-            console.log('ctx.secure\n', ctx.secure);
-            console.log('ctx.ip\n', ctx.ip);
-            console.log('ctx.accepts()\n', ctx.accepts());
-            // console.log('ctx.get()\n', ctx.get());
-
-            _context2.next = 18;
+            _context2.next = 2;
             return next();
 
-          case 18:
+          case 2:
           case 'end':
             return _context2.stop();
         }
@@ -102,22 +88,32 @@ app.use(function () {
 }());
 
 app.use(function () {
-  var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx) {
+  var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx, next) {
     var user;
     return _regenerator2.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            user = 'Cntchen';
+            if (!next) {
+              _context3.next = 3;
+              break;
+            }
 
-            ctx.set({
-              'Set-Cookie': 'from=' + ctx.hostname + '; path=/',
-              'access-control-allow-origin': ctx.header.origin
-            });
-            // ctx.cookies.set(name, value, [options])
-            ctx.body = user; // ctx instead of this
+            _context3.next = 3;
+            return next();
 
           case 3:
+            user = 'Cntchen';
+            // ctx.set({
+            //   'Set-CooKIe': 'from=' + ctx.hostname + '; path=/',
+            //   'access-control-allow-origin': ctx.header.origin,
+            //   'Access-control-allow-origin': ctx.header.origin,    
+            // });
+            // ctx.cookies.set(name, value, [options])
+
+            ctx.body = user; // ctx instead of this
+
+          case 5:
           case 'end':
             return _context3.stop();
         }
@@ -125,9 +121,11 @@ app.use(function () {
     }, _callee3, undefined);
   }));
 
-  return function (_x5) {
+  return function (_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
 }());
+
+app.use(_koav2Cors2.default);
 
 app.listen(_config2.default.MiddleWarePort, _config2.default.MiddleWareDomain);

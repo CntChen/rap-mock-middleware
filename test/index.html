@@ -5,22 +5,23 @@
 </head>
 <body>
   <p>RAP Mock Middleware Test<p>
+  <p>Open dev-tool "network" panel to see the result<p>    
   <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
     // add Cookie
     document.cookie = 'hello=world';
-    var ServerUrl = 'http://192.168.1.5:28080/';
+    var ServerUrl = 'http://10.75.3.135:28080/';
 
     // 写headers时候大小写无关。???
 
     // Simple Request
     // GET
     $.ajax({
-      url: ServerUrl,
+      url: ServerUrl + 'simple_get',
       type: 'GET',
       headers: {
         //the headers set automatically by the user agent
-        // 'Accept': '*/*',
+        'accept': '*/*',
         // 'Accept-Language': 'en-US,en;q=0.81',
 
         // 浏览器知道自己的能力是什么，所以这些默认头JS开发者自己设置也没用，浏览器会覆写的,console
@@ -39,8 +40,10 @@
 
         // allowed to be manually set
         'Accept': 'ramdom',
-        'Accept-Language': 'ramdom',
+        'Accept-LanGUAge': 'ramdom',
+        'Accept-Language': 'ramdom1',
         'Content-Language': 'ramdom',
+        'ETag': 'test',
 
         // enumeration:`application/x-www-form-urlencoded` `multipart/form-data` `text/plain`
         'Content-Type': 'text/plain',
@@ -54,85 +57,107 @@
       },
     });
 
-    // POST
-    $.ajax({
-      url: ServerUrl,
-      type: 'POST',
-      headers: {
-      },
-      data: {},
-      success: function(dt){
-        console.log(dt);
-      },
-      beforeSend: function(xhr){
-      },
-    });
+    // // POST
+    // $.ajax({
+    //   url: ServerUrl + 'simple_post',
+    //   type: 'POST',
+    //   headers: {
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //   beforeSend: function(xhr){
+    //   },
+    // });
 
-    // HEAD
-    $.ajax({
-      url: ServerUrl,
-      type: 'HEAD',
-      headers: {
-      },
-      data: {},
-      success: function(dt){
-        console.log(dt);
-      },
-      beforeSend: function(xhr){
-      },
-    });
+    // // HEAD
+    // $.ajax({
+    //   url: ServerUrl + 'simple_head',
+    //   type: 'HEAD',
+    //   headers: {
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //   beforeSend: function(xhr){
+    //   },
+    // });
 
-    // Preflighted Requests
-    // uses methods other than GET, HEAD or POST
-    $.ajax({
-      url: ServerUrl,
-      type: 'DELETE',
-      headers: {
-      },
-      data: {},
-      success: function(dt){
-        console.log(dt);
-      },
-      beforeSend: function(xhr){
-      },
-    });
+    // // Preflighted Requests
+    // // uses methods other than GET, HEAD or POST
+    // $.ajax({
+    //   url: ServerUrl + 'delete',
+    //   type: 'DELETE',
+    //   headers: {
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //   beforeSend: function(xhr){
+    //   },
+    // });
 
-    // Content-Type other than enumeration
-    $.ajax({
-      url: ServerUrl,
-      type: 'GET',
-      headers: {
-        'Content-Type': 'text/xml',
-      },
-      data: {},
-      success: function(dt){
-        console.log(dt);
-      },
-      beforeSend: function(xhr){
-      },
-    });
+    // // Content-Type other than enumeration
+    // $.ajax({
+    //   url: ServerUrl + 'other_content_type',
+    //   type: 'GET',
+    //   headers: {
+    //     'Content-Type': 'text/xml',
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //   beforeSend: function(xhr){
+    //   },
+    // });
 
-    // custom headers in the request
-    $.ajax({
-      url: ServerUrl,
-      type: 'GET',
-      headers: {
-        'cntchen': 'FE',
-      },
-      data: {},
-      success: function(dt){
-        console.log(dt);
-      },
-      beforeSend: function(xhr){
-      },
-    });
+    // // custom headers in the request
+    // $.ajax({
+    //   url: ServerUrl + 'custom_headers',
+    //   type: 'GET',
+    //   headers: {
+    //     'cntchen': 'FE',
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //   beforeSend: function(xhr){
+    //   },
+    // });
 
-    var invocation = new XMLHttpRequest();    
-    if(invocation) {
-      invocation.open('GET', ServerUrl, true);
-      invocation.withCredentials = true;
-      invocation.send(); 
-    }
+    // // with credentials
+    // $.ajax({
+    //   url: ServerUrl + 'with_credentials',
+    //   type: 'GET',
+    //   headers: {
+    //   },
+    //   data: {},
+    //   success: function(dt){
+    //     console.log(dt);
+    //   },
+    //    xhrFields: { 
+    //      withCredentials: true,
+    //   },
+    //   beforeSend: function(xhr){
+    //     xhr.withCredentials = true;
+    //     console.log(xhr);
+    //     return xhr;
+    //   },
+    // });
+
+    // var invocation = new XMLHttpRequest();
+    //  console.log(invocation);
+    // if(invocation) {
+    //   invocation.open('GET', ServerUrl, true);
+    //   invocation.withCredentials = true;
+    //   invocation.setRequestHeader('cntchen', 'FE');
+    //   invocation.send(); 
+    // }
 
   </script>
 </body>
