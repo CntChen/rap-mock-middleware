@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "rap mock middleware",
   "main": "dist/index.js",
+  "scripts": {
+    "start": "gulp babel && node dist/index"
+  },
   "author": "cntchen",
   "license": "MIT",
   "dependencies": {

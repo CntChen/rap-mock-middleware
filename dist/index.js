@@ -16,18 +16,22 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _koav2Cors = require('./koav2-cors');
+var _koa2Cors = require('./koa2-cors');
 
-var _koav2Cors2 = _interopRequireDefault(_koav2Cors);
+var _koa2Cors2 = _interopRequireDefault(_koa2Cors);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Koa application is now a class and requires the new operator.
 var app = new _koa2.default();
 
 /**
- * 出错控制
+ * error control
  */
+/**
+ * created by CntChen
+ * date 2016-12-20
+ */
+
 app.use(function () {
   var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(ctx, next) {
     return _regenerator2.default.wrap(function _callee$(_context) {
@@ -87,9 +91,11 @@ app.use(function () {
   };
 }());
 
+/**
+ * set response body
+ */
 app.use(function () {
   var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx, next) {
-    var user;
     return _regenerator2.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -103,17 +109,10 @@ app.use(function () {
             return next();
 
           case 3:
-            user = 'Cntchen';
-            // ctx.set({
-            //   'Set-CooKIe': 'from=' + ctx.hostname + '; path=/',
-            //   'access-control-allow-origin': ctx.header.origin,
-            //   'Access-control-allow-origin': ctx.header.origin,    
-            // });
-            // ctx.cookies.set(name, value, [options])
 
-            ctx.body = user; // ctx instead of this
+            ctx.body = 'RAP TEST';
 
-          case 5:
+          case 4:
           case 'end':
             return _context3.stop();
         }
@@ -126,6 +125,9 @@ app.use(function () {
   };
 }());
 
-app.use(_koav2Cors2.default);
+/**
+ * set cors headers
+ */
+app.use((0, _koa2Cors2.default)());
 
 app.listen(_config2.default.MiddleWarePort, _config2.default.MiddleWareDomain);

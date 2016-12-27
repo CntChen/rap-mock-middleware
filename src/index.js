@@ -1,16 +1,20 @@
+/**
+ * created by CntChen
+ * date 2016-12-20
+ */
+
 import Koa from 'koa';
 import Config from './config';
-import KoaV2CORS from './koav2-cors';
+import GetKoaCors from './koa2-cors';
 
-// Koa application is now a class and requires the new operator.
 const app = new Koa();
 
 /**
- * 出错控制
+ * error control
  */
 app.use(async (ctx, next) => {
   try {
-    await next(); // next is now a function
+    await next();
   } catch (err) {
     ctx.body = { message: err.message };
     ctx.status = err.status || 500;
@@ -45,21 +49,21 @@ app.use(async (ctx, next) => {
   await next();
 });
 
+/**
+ * set response body
+ */
 app.use(async (ctx, next) => {
   if(next){
     await next();
   }
 
-  const user = 'Cntchen';
-  // ctx.set({
-  //   'Set-CooKIe': 'from=' + ctx.hostname + '; path=/',
-  //   'access-control-allow-origin': ctx.header.origin,
-  //   'Access-control-allow-origin': ctx.header.origin,    
-  // });
-  // ctx.cookies.set(name, value, [options])
-  ctx.body = user; // ctx instead of this
+  ctx.body = 'RAP TEST';
 });
 
-app.use(KoaV2CORS);
+/**
+ * set cors headers
+ */
+app.use(GetKoaCors());
+
 
 app.listen(Config.MiddleWarePort, Config.MiddleWareDomain);

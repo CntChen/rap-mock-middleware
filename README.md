@@ -1,3 +1,12 @@
+### 
+
+## 技术栈
+* RAP
+* KOA@2
+* mockjs
+* koa-next-cors
+* ES6
+
 ### run
 ```
 $ yarn install // npm install

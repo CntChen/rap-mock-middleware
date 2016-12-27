@@ -10,7 +10,7 @@
   <script type="text/javascript">
     // add Cookie
     document.cookie = 'hello=world';
-    var ServerUrl = 'http://10.75.3.135:28080/';
+    var ServerUrl = 'http://0.0.0.0:28080/';
 
     // 写headers时候大小写无关。???
 
@@ -18,7 +18,7 @@
     // GET
     $.ajax({
       url: ServerUrl + 'simple_get',
-      type: 'GET',
+      type: 'DELETE',
       headers: {
         //the headers set automatically by the user agent
         'accept': '*/*',
@@ -43,7 +43,7 @@
         'Accept-LanGUAge': 'ramdom',
         'Accept-Language': 'ramdom1',
         'Content-Language': 'ramdom',
-        'ETag': 'test',
+        // 'ETag': 'test',
 
         // enumeration:`application/x-www-form-urlencoded` `multipart/form-data` `text/plain`
         'Content-Type': 'text/plain',
